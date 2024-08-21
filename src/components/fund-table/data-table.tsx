@@ -12,7 +12,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
+} from "../ui/table"  // Adjust this import to your project structure
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
