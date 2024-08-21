@@ -15,7 +15,7 @@ import { PaymentTable } from './components/fund-table/PaymentTable'
 
       {/* NAVIGATION BAR SECTION */}
       <div className="flex justify-between ">
-        <h2 className='text-3xl font-semibold'>TDMM</h2>
+        <h2 className='text-3xl font-semibold'>TDMM Fund Managment system</h2>
         <div className="flex gap-2 ">    
           <Button>Login</Button>
           <ModeToggle />

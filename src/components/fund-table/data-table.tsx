@@ -76,7 +76,6 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-
              {/* COLUMN VISBILITY DROP DOWN */}
          <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -106,6 +105,8 @@ export function DataTable<TData, TValue>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+
+        <Button variant="outline" className="ml-1">Add Project</Button>
       </div>
               {/* TABLE SEECTION */}
       <div className="rounded-md border">
