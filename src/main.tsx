@@ -1,10 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { ThemeProvider } from './components/theme-provider'
 import App from './App.tsx'
 import './index.css'
+import Navbar from './components/navbar.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <Navbar/>
+        <App />
+      </ThemeProvider>
   </StrictMode>,
 )

@@ -1,9 +1,9 @@
 
 import './App.css'
-import { Button } from './components/ui/button'
-import { ThemeProvider } from './components/theme-provider'
-import { ModeToggle } from './components/mode-toggle'
-import { PaymentTable } from './components/fund-table/PaymentTable'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import HomePage from './page/home/HomePage';
+import ProjectPage from './page/project/ProjectPage';
+import BudgetPage from './page/budget/BudgetPage';
 
 
 
@@ -11,24 +11,16 @@ import { PaymentTable } from './components/fund-table/PaymentTable'
  
   
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/project' element={<ProjectPage />} />
+            <Route path='/budget' element={<BudgetPage />}/>
+          </Routes>
 
-      {/* NAVIGATION BAR SECTION */}
-      <div className="flex justify-between ">
-        <h2 className='text-3xl font-semibold'>TDMM Fund Managment system</h2>
-        <div className="flex gap-2 ">    
-          <Button>Login</Button>
-          <ModeToggle />
-        </div>   
-      </div>
-      
-      {/* TABLE SECTION */}
-
-      <div className='mt-10'>
-       <PaymentTable />
-      </div>
-
-    </ThemeProvider>
+        </BrowserRouter>
+    </div>
   )
 }
 
