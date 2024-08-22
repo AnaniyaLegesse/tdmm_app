@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from './page/home/HomePage';
 import ProjectPage from './page/project/ProjectPage';
 import BudgetPage from './page/budget/BudgetPage';
+import Navbar from './components/navbar';
 
 
 
@@ -13,12 +14,12 @@ import BudgetPage from './page/budget/BudgetPage';
   return (
       <div>
         <BrowserRouter>
+        <Navbar/>
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/project' element={<ProjectPage />} />
             <Route path='/budget' element={<BudgetPage />}/>
-          </Routes>
-
+          </Routes>   
         </BrowserRouter>
     </div>
   )
