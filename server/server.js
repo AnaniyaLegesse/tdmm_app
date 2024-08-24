@@ -1,6 +1,7 @@
 require("dotenv").config()
 
 const express=require('express')
+const mongoose=require('mongoose')
 const projectsroutes=require('./routes/projects')
 
 //express app
@@ -17,7 +18,14 @@ app.use((req,res,next)=>{
 //routes
 app.use('/api/projects',projectsroutes)
 
-
-app.listen(process.env.PORT,()=>{
-    console.log("listening on port ", process.env.PORT)
+mongoose.connect(process.env.MONGO_URI)
+.then(()=>{
+    app.listen(process.env.PORT,()=>{
+        console.log("connected to db and listening on port ", process.env.PORT)
+    })
 })
+.catch((error)=>{
+    console.log(error)
+})
+
+
