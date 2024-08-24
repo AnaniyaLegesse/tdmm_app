@@ -41,7 +41,7 @@ const createProject=async (req,res)=>{
 }
 
 
-
+//delete a project
 
 
 //update a project
