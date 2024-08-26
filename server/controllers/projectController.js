@@ -42,13 +42,48 @@ const createProject=async (req,res)=>{
 
 
 //delete a project
+const deleteProject=async (req,res)=>{
+    const {id}=req.params
 
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error:'No such project'})
+    }
+
+   
+    const project= await Project.findOneAndDelete({_id:id})
+   
+    if(!project){
+        return res.status(404).json({error:'No such project'})
+     }
+ 
+     res.status(200).json(project)
+}
 
 //update a project
+const updateProject=async (req,res)=>{
+    const {id}=req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error:'No such project'})
+    }
+
+   
+    const project= await Project.findOneAndUpdate({_id:id},{
+        ...req.body
+    })
+   
+    if(!project){
+        return res.status(404).json({error:'No such project'})
+     }
+ 
+     res.status(200).json(project)
+}
 
 
 module.exports={
     getProjects,
     getProject,
-    createProject
+    createProject,
+    deleteProject,
+    updateProject
 }
