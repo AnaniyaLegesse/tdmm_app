@@ -29,6 +29,7 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Link } from "react-router-dom"
  
 
 interface DataTableProps<TData, TValue> {
@@ -106,7 +107,11 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
 
-        <Button variant="outline" className="ml-1">Add Project</Button>
+        <Link to="/addproject" className="ml-1">
+          <Button variant="outline" className="ml-1">Add Project</Button>
+        </Link>
+
+        
       </div>
               {/* TABLE SEECTION */}
       <div className="rounded-md border">
