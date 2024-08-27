@@ -5,7 +5,8 @@ import HomePage from './page/home/HomePage';
 import ProjectPage from './page/project/ProjectPage';
 import FundPage from './page/fund/FundPage';
 import Navbar from './components/navbar';
-import AddPage from './page/add-from/AddPage';
+import AddPage from './page/add-from/AddProject';
+import AddFund from './page/add-from/AddFund';
 
 
 
@@ -21,6 +22,7 @@ import AddPage from './page/add-from/AddPage';
             <Route path='/project' element={<ProjectPage />} />
             <Route path='/fund' element={<FundPage />}/>
             <Route path='/addproject' element={<AddPage/>} />
+            <Route path='/addfund' element={<AddFund/>} />
           </Routes>   
         </BrowserRouter>
     </div>

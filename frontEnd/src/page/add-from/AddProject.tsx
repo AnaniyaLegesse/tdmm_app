@@ -21,14 +21,12 @@ const formSchema = z.object({
     }),
     budget: z.number()
   })
-const AddPage = () => {
+const AddProject = () => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
           projectname: "",
-          budget: 0,
-
         },
       })
     
@@ -85,4 +83,4 @@ const AddPage = () => {
      );
 }
  
-export default AddPage;
+export default AddProject;

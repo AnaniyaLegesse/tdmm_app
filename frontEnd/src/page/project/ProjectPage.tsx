@@ -1,6 +1,8 @@
 import  { useEffect, useState } from "react"
 import { ProjectPageData , projectPageColumns } from "@/components/fund-table/columns"
 import { DataTable } from "@/components/fund-table/data-table"
+import { Link } from "react-router-dom"
+import { Button } from "@/components/ui/button"
 
 interface ProjectPageProps {
   data?: ProjectPageData[] // Optional prop to pass data; if not provided, it will fetch its own
@@ -166,6 +168,9 @@ export default function ProjectPage({ data: initialData }: ProjectPageProps) {
   return (
     <div className="container mx-auto py-10">
        projects table
+       <Link to="/addproject" className="ml-1">
+          <Button variant="outline" className="ml-1">Add Project</Button>
+        </Link>
       <DataTable columns={projectPageColumns} data={data} />
     </div>
   )

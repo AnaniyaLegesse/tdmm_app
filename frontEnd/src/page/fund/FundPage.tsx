@@ -1,6 +1,8 @@
 import  { useEffect, useState } from "react"
 import { FundPageColumns, FundPageData } from "@/components/fund-table/columns"
 import { DataTable } from "@/components/fund-table/data-table"
+import { Link } from "react-router-dom"
+import { Button } from "@/components/ui/button"
 
 interface FundPageProps {
   data?: FundPageData[] // Optional prop to pass data; if not provided, it will fetch its own
@@ -136,6 +138,9 @@ export  default function FundPage({ data: initialData }: FundPageProps) {
   return (
     <div className="container mx-auto py-10">
         <h1>Fund page</h1>
+        <Link to="/addfund" className="ml-1">
+          <Button variant="outline" className="ml-1">Add Fund</Button>
+        </Link>
       <DataTable columns={FundPageColumns} data={data} />
     </div>
   )
