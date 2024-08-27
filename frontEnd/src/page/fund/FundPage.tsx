@@ -137,10 +137,12 @@ export  default function FundPage({ data: initialData }: FundPageProps) {
 
   return (
     <div className="container mx-auto py-10">
-        <h1>Fund page</h1>
-        <Link to="/addfund" className="ml-1">
-          <Button variant="outline" className="ml-1">Add Fund</Button>
-        </Link>
+      <div className="flex justify-between">
+        <h1 className="text-xl font-semibold">Fund page</h1>
+          <Link to="/addfund" className="ml-1">
+            <Button  className="ml-1">Add Fund</Button>
+          </Link>
+      </div>      
       <DataTable columns={FundPageColumns} data={data} />
     </div>
   )

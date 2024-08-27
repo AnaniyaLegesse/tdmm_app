@@ -36,50 +36,54 @@ const AddProject = () => {
       
       
     return ( 
-        <div className="mt-20 w-[50%]">
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="text-left space-y-8">
+        <div className="mt-10 w-[50%]">
+          <h1 className="text-xl font-semibold">Add new Project here!</h1>
+          <div className="mt-10 ">
+            
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="text-left space-y-8">
 
-                {/* NAME FIELD */}
-                <FormField
-                    control={form.control}
-                    name="projectname"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Project name</FormLabel>
-                            <FormControl>
-                                <Input placeholder="Project 101" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                Enter your project name.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                 />
+                  {/* NAME FIELD */}
+                  <FormField
+                      control={form.control}
+                      name="projectname"
+                      render={({ field }) => (
+                          <FormItem>
+                              <FormLabel>Project name</FormLabel>
+                              <FormControl>
+                                  <Input placeholder="Project 101" {...field} />
+                              </FormControl>
+                              <FormDescription>
+                                  Enter your project name.
+                              </FormDescription>
+                              <FormMessage />
+                          </FormItem>
+                      )}
+                  />
 
-                 {/* BUDGET FIELD */}
-                 <FormField
-                    control={form.control}
-                    name="budget"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Budget</FormLabel>
-                            <FormControl>
-                                <Input placeholder="$ 100000" {...field} />
-                            </FormControl>
-                            <FormDescription>
-                                 Enter the buget allocated fro the project.
-                            </FormDescription>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                 />
+                  {/* BUDGET FIELD */}
+                  <FormField
+                      control={form.control}
+                      name="budget"
+                      render={({ field }) => (
+                          <FormItem>
+                              <FormLabel>Budget</FormLabel>
+                              <FormControl>
+                                  <Input placeholder="$ 100000" {...field} />
+                              </FormControl>
+                              <FormDescription>
+                                  Enter the buget allocated fro the project.
+                              </FormDescription>
+                              <FormMessage />
+                          </FormItem>
+                      )}
+                  />
 
-                 <Button type="submit">Submit</Button>
-               </form>
-            </Form>
-    </div>
+                  <Button type="submit">Submit</Button>
+                </form>
+              </Form>
+          </div>
+        </div>
      );
 }
  

@@ -167,10 +167,12 @@ export default function ProjectPage({ data: initialData }: ProjectPageProps) {
 
   return (
     <div className="container mx-auto py-10">
-       projects table
-       <Link to="/addproject" className="ml-1">
-          <Button variant="outline" className="ml-1">Add Project</Button>
-        </Link>
+      <div className="flex justify-between">
+        <h1 className="text-xl font-semibold">Project page</h1>
+        <Link to="/addproject" className="ml-1">
+            <Button  className="ml-1">Add Project</Button>
+          </Link>
+        </div>
       <DataTable columns={projectPageColumns} data={data} />
     </div>
   )

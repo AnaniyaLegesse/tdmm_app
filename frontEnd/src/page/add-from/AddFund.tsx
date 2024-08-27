@@ -38,8 +38,9 @@ const AddFund = () => {
       
       
     return ( 
-        <div className="mt-20 w-[50%]">
-          
+      <div className="mt-10 w-[50%]">
+          <h1 className="text-xl font-semibold">Add new Fund here!</h1>
+          <div className="mt-10 ">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="text-left space-y-8">
 
@@ -101,7 +102,8 @@ const AddFund = () => {
                  <Button type="submit">Submit</Button>
                </form>
             </Form>
-    </div>
+          </div>
+      </div>    
      );
 }
  
