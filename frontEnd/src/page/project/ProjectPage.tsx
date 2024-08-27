@@ -1,179 +1,52 @@
-import  { useEffect, useState } from "react"
-import { ProjectPageData , projectPageColumns } from "@/components/fund-table/columns"
-import { DataTable } from "@/components/fund-table/data-table"
-import { Link } from "react-router-dom"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react";
+import { ProjectPageData, projectPageColumns } from "@/components/fund-table/columns";
+import { DataTable } from "@/components/fund-table/data-table";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 interface ProjectPageProps {
-  data?: ProjectPageData[] // Optional prop to pass data; if not provided, it will fetch its own
+  data?: ProjectPageData[]; // Optional prop to pass data; if not provided, it will fetch its own
 }
 
 export default function ProjectPage({ data: initialData }: ProjectPageProps) {
-  const [data, setData] = useState<ProjectPageData[]>(initialData || [])
+  const [data, setData] = useState<ProjectPageData[]>(initialData || []);
+  const [loading, setLoading] = useState<boolean>(!initialData); // State to track loading status
 
   useEffect(() => {
     if (!initialData) {
-      async function fetchData() {
-        const fetchedData = await getData()
-        setData(fetchedData)
-      }
+      const fetchData = async () => {
+        setLoading(true); // Set loading to true before fetching data
+        try {
+          const response = await fetch("/api/projects");
+          if (!response.ok) {
+            throw new Error("Failed to fetch data");
+          }
+          const json = await response.json();
+          setData(json);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setLoading(false); // Set loading to false after data is fetched
+        }
+      };
 
-      fetchData()
+      fetchData();
     }
-  }, [initialData])
-
-  async function getData(): Promise<ProjectPageData[]> {
-    // Simulate an API call
-    return [
-      {
-        id: "11kka",
-        name: "project 101",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 102",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 103",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 104",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 105",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 101",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 102",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 103",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 104",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 105",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 101",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 102",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 103",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 104",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "project 105",
-        budget: 5000,
-        utlized_amount: 2000,
-        variance: 3000,
-        status: "at budget",
-        date: new Date(),
-      },
-      
-      // Additional dummy data
-    ]
-  }
+  }, [initialData]);
 
   return (
     <div className="container mx-auto py-10">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold">Project page</h1>
         <Link to="/addproject" className="ml-1">
-            <Button  className="ml-1">Add Project</Button>
-          </Link>
-        </div>
-      <DataTable columns={projectPageColumns} data={data} />
+          <Button className="ml-1">Add Project</Button>
+        </Link>
+      </div>
+      {loading ? (
+        <p>Loading...</p> // Display a loading message while data is being fetched
+      ) : (
+        <DataTable columns={projectPageColumns} data={data} />
+      )}
     </div>
-  )
+  );
 }
