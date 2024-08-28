@@ -9,11 +9,20 @@ const HomePage = () => {
     return ( 
         <div className="mt-10">
             Report page
-        <div className="mt-10 flex flex-cols justify-center gap-20">
-            <Areachart />
-            <Barchart/>
-            <Piechart/>      
+        <div className="flex gap-4 ">
+            <div className="flex-initial w-64">
+                <Areachart />
+            </div>
+
+             <Piechart/> 
+            
+            <div className="flex-initial w-64">
+                <Barchart/>  
+            </div>
+            
+                
         </div>
+         
         </div>
      );
 }
