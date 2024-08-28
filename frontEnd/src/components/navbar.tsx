@@ -6,8 +6,9 @@ const Navbar = () => {
 
   const pageLinks = [
     {path:"/", label:"Home"},
-    {path:"/project", label:"Project"},
-    {path:"/fund", label:"Fund"},
+    {path:"/projects", label:"Project"},
+    {path:"/funds", label:"Fund"},
+    {path:"/costs", label:"Cost"},
 
   ]
     

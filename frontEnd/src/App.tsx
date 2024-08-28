@@ -7,6 +7,7 @@ import FundPage from './page/fund/FundPage';
 import Navbar from './components/navbar';
 import AddPage from './page/add-from/AddProject';
 import AddFund from './page/add-from/AddFund';
+import CostPage from './page/costs/CostPage';
 
 
 
@@ -19,8 +20,9 @@ import AddFund from './page/add-from/AddFund';
         <Navbar/>
           <Routes>
             <Route path='/' element={<HomePage />} />
-            <Route path='/project' element={<ProjectPage />} />
-            <Route path='/fund' element={<FundPage />}/>
+            <Route path='/projects' element={<ProjectPage />} />
+            <Route path='/funds' element={<FundPage />}/>
+            <Route path='/costs' element={<CostPage />}/>
             <Route path='/addproject' element={<AddPage/>} />
             <Route path='/addfund' element={<AddFund/>} />
           </Routes>   
