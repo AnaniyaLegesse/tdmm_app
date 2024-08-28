@@ -9,30 +9,25 @@ interface ProjectPageProps {
 }
 
 export default function ProjectPage({ data: initialData }: ProjectPageProps) {
-  const [data, setData] = useState<ProjectPageData[]>(initialData || []);
-  const [loading, setLoading] = useState<boolean>(!initialData); // State to track loading status
+  const [data, setData] = useState<ProjectPageData[]>(initialData || [])
 
   useEffect(() => {
     if (!initialData) {
-      const fetchData = async () => {
-        setLoading(true); // Set loading to true before fetching data
-        try {
-          const response = await fetch("/api/projects");
+      async function fetchData() {
+        
+          const response = await fetch('/api/projects'); 
           if (!response.ok) {
-            throw new Error("Failed to fetch data");
+              throw new Error(`HTTP error! status: ${response.status}`);
           }
-          const json = await response.json();
-          setData(json);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        } finally {
-          setLoading(false); // Set loading to false after data is fetched
-        }
-      };
 
-      fetchData();
+         const fetchedData = await response.json();
+         setData(fetchedData)
+      }
+
+      fetchData()
     }
-  }, [initialData]);
+  }, [initialData])
+
 
   return (
     <div className="container mx-auto py-10">
@@ -41,12 +36,8 @@ export default function ProjectPage({ data: initialData }: ProjectPageProps) {
         <Link to="/addproject" className="ml-1">
           <Button className="ml-1">Add Project</Button>
         </Link>
-      </div>
-      {loading ? (
-        <p>Loading...</p> // Display a loading message while data is being fetched
-      ) : (
-        <DataTable columns={projectPageColumns} data={data} />
-      )}
+      </div> 
+        <DataTable columns={projectPageColumns} data={data} /> 
     </div>
   );
 }

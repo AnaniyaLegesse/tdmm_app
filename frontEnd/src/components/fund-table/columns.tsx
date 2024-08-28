@@ -21,7 +21,6 @@ export type ProjectPageData = {
   utlized_amount: number
   variance: number
   status: "under budget" | "at budget" | "over budget" 
-  date: Date
 }
 
 export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
@@ -105,10 +104,7 @@ export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
     accessorKey: "status",
     header: "Status",
   },
-  {
-    accessorKey: "date",
-    header: "Date",
-  },
+  
     
   {
     id: "actions",
