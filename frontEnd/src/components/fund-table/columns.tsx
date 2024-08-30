@@ -143,8 +143,7 @@ export type FundPageData = {
   id: string
   name: string
   amount: number
-  fund_type: "Unristricted" | "ristricted" 
-  date: Date
+  fund_type: String
 }
 
 export const FundPageColumns: ColumnDef<FundPageData>[] = [
@@ -246,7 +245,6 @@ export type CostPageData = {
   name: string
   amount: number
   project: string
-  date: Date
 }
 
 export const CostPageColumns: ColumnDef<CostPageData>[] = [

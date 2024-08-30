@@ -4,136 +4,32 @@ import { DataTable } from "@/components/fund-table/data-table"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 
-interface CostPageProps {
-  data?: CostPageData[] // Optional prop to pass data; if not provided, it will fetch its own
-}
+type Cost={
+  _id:string;
+  id:string;
+  name:string;
+  amount:number;
+  project:string;
+};
 
-export  default function CostPage({ data: initialData }: CostPageProps) {
-  const [data, setData] = useState<CostPageData[]>(initialData || [])
+const CostPage = () => {
+  const [costs, setCosts] = useState<Cost[]>([])
 
   useEffect(() => {
-    if (!initialData) {
-      async function fetchData() {
-        const fetchedData = await getData()
-        setData(fetchedData)
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/costs');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const json = await response.json();
+        setCosts(json);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
       }
-
-      fetchData()
-    }
-  }, [initialData])
-
-  async function getData(): Promise<CostPageData[]> {
-    // Simulate an API call
-    return [
-      {
-        id: "11kka",
-        name: "Alemayehu",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Bereket",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Kirubel",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Daniel",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Chala",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Alemayehu",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Bereket",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Kirubel",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Daniel",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Chala",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Alemayehu",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Bereket",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Kirubel",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Daniel",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      {
-        id: "11kka",
-        name: "Chala",
-        amount: 5000,
-        project: "ristricted",
-        date: new Date(),
-      },
-      
-      // Additional dummy data
-    ]
-  }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="container mx-auto py-10">
@@ -143,7 +39,10 @@ export  default function CostPage({ data: initialData }: CostPageProps) {
             <Button  className="ml-1">Add Cost</Button>
           </Link>
       </div>      
-      <DataTable columns={CostPageColumns} data={data} />
+      <DataTable columns={CostPageColumns} data={costs} />
     </div>
   )
 }
+
+
+export default CostPage;
