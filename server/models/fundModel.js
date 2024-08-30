@@ -12,7 +12,7 @@ const fundSchema=new Schema({
         required:true
     },
     fund_type:{
-        type:Number,
+        type:String,
         required:true
     }
 },{timestamps:true})

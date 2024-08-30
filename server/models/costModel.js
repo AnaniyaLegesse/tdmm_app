@@ -12,7 +12,8 @@ const costSchema=new Schema({
         required:true
     },
     project:{
-        type:Number
+        type:String,
+        required:true
     }
 },{timestamps:true})
 

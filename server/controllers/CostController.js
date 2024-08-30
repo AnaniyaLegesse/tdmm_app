@@ -4,9 +4,9 @@ const mongoose= require('mongoose')
 
 //get all Costs
 const getCosts=async(req,res)=>{
-    const Costs= await Cost.find({}).sort({createdAt:-1})
+    const costs= await Cost.find({}).sort({createdAt:-1})
 
-    res.status(200).json(Costs)
+    res.status(200).json(costs)
 }
 
 
@@ -18,23 +18,23 @@ const getCost=async(req,res)=>{
         return res.status(404).json({error:'No such Cost'})
     }
 
-    const Cost=await Cost.findById(id)
+    const cost=await Cost.findById(id)
 
-    if(!Cost){
+    if(!cost){
        return res.status(404).json({error:'No such Cost'})
     }
 
-    res.status(200).json(Cost)
+    res.status(200).json(cost)
 }
 
 
 //create a new Cost
 const createCost=async (req,res)=>{
-    const {name,budget,utlized_amount,variance,status}=req.body
+    const {name,amount,project}=req.body
 
     try{
-        const Cost=await Cost.create({name,budget,utlized_amount,variance,status})
-        res.status(200).json({Cost})
+        const cost=await Cost.create({name,amount,project})
+        res.status(200).json({cost})
     }catch(error){
         res.status(400).json({error:error.message})
     }
@@ -50,13 +50,13 @@ const deleteCost=async (req,res)=>{
     }
 
    
-    const Cost= await Cost.findOneAndDelete({_id:id})
+    const cost= await Cost.findOneAndDelete({_id:id})
    
-    if(!Cost){
+    if(!cost){
         return res.status(404).json({error:'No such Cost'})
      }
  
-     res.status(200).json(Cost)
+     res.status(200).json(cost)
 }
 
 //update a Cost
@@ -68,15 +68,15 @@ const updateCost=async (req,res)=>{
     }
 
    
-    const Cost= await Cost.findOneAndUpdate({_id:id},{
+    const cost= await Cost.findOneAndUpdate({_id:id},{
         ...req.body
     })
    
-    if(!Cost){
+    if(!cost){
         return res.status(404).json({error:'No such Cost'})
      }
  
-     res.status(200).json(Cost)
+     res.status(200).json(cost)
 }
 
 
