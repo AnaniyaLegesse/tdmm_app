@@ -1,13 +1,19 @@
 require("dotenv").config()
 
 const express=require('express')
+const cors = require('cors');
 const mongoose=require('mongoose')
 const projectsroutes=require('./routes/projects')
+const fundsroutes=require('./routes/funds')
+const costsroutes=require('./routes/costs')
 
 //express app
 const app=express()
 
+
+
 //middleware
+app.use(cors());
 app.use(express.json())
 
 app.use((req,res,next)=>{
@@ -17,6 +23,8 @@ app.use((req,res,next)=>{
 
 //routes
 app.use('/api/projects',projectsroutes)
+app.use('/api/funds',fundsroutes)
+app.use('/api/costs',costsroutes)
 
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>{

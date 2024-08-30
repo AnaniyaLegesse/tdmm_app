@@ -20,7 +20,7 @@ export type ProjectPageData = {
   budget: number
   utlized_amount: number
   variance: number
-  status: "under budget" | "at budget" | "over budget" 
+  status: string
 }
 
 export const projectPageColumns: ColumnDef<ProjectPageData>[] = [

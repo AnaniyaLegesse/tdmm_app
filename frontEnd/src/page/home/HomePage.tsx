@@ -7,20 +7,20 @@ import { Piechart } from "@/components/piechart"
 
 const HomePage = () => {
     return ( 
-        <div className="mt-10">
+        <div className="">
             Report page
-        <div className="flex gap-4 ">
-            <div className="flex-initial w-64">
+        <div className="flex gap-2 mt-5 justify-center">
+            <div className="w-1/2">
                 <Areachart />
             </div>
+             <Piechart/>               
+        </div>
 
-             <Piechart/> 
-            
-            <div className="flex-initial w-64">
-                <Barchart/>  
-            </div>
-            
-                
+        <div className="flex gap-2 mt-5 justify-center">
+             <Piechart/>   
+            <div className="w-1/2">
+             <Barchart/>  
+            </div>        
         </div>
          
         </div>

@@ -1,43 +1,48 @@
-import { useEffect, useState } from "react";
-import { ProjectPageData, projectPageColumns } from "@/components/fund-table/columns";
+import { projectPageColumns } from "@/components/fund-table/columns";
 import { DataTable } from "@/components/fund-table/data-table";
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-interface ProjectPageProps {
-  data?: ProjectPageData[]; // Optional prop to pass data; if not provided, it will fetch its own
-}
+type Project={
+  _id:string;
+  id:string;
+  name:string;
+  budget: number;
+  utlized_amount: number;
+  variance: number;
+  status: string;
+};
 
-export default function ProjectPage({ data: initialData }: ProjectPageProps) {
-  const [data, setData] = useState<ProjectPageData[]>(initialData || [])
+const ProjectPage = () => {
+  const [projects, setProjects] = useState<Project[]>([])
 
   useEffect(() => {
-    if (!initialData) {
-      async function fetchData() {
-        
-          const response = await fetch('/api/projects'); 
-          if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-          }
-
-         const fetchedData = await response.json();
-         setData(fetchedData)
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/api/projects');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const json = await response.json();
+        setProjects(json);
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
       }
+    };
+    fetchData();
+  }, []);
 
-      fetchData()
-    }
-  }, [initialData])
-
-
-  return (
+  return ( 
     <div className="container mx-auto py-10">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold">Project page</h1>
-        <Link to="/addproject" className="ml-1">
-          <Button className="ml-1">Add Project</Button>
-        </Link>
-      </div> 
-        <DataTable columns={projectPageColumns} data={data} /> 
+          <Link to="/addfund" className="ml-1">
+            <Button  className="ml-1">Add project</Button>
+          </Link>
+      </div>      
+      <DataTable columns={projectPageColumns} data={projects} />
     </div>
-  );
+   );
 }
+export default ProjectPage;

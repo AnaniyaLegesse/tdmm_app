@@ -2,24 +2,18 @@ const mongoose=require('mongoose')
 
 const Schema=mongoose.Schema
 
-const projectSchema=new Schema({
+const costSchema=new Schema({
     name:{
         type:String,
         required:true
     },
-    budget:{
+    amount:{
         type:Number,
         required:true
     },
-    utlized_amount:{
+    project:{
         type:Number
-    },
-    variance:{
-        type:Number
-    },
-    status:{
-        type:String
-    },
+    }
 },{timestamps:true})
 
-module.exports=mongoose.model('Project',projectSchema)
+module.exports=mongoose.model('Cost',costSchema)
