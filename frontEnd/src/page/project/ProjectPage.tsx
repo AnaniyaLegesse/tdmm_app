@@ -37,7 +37,7 @@ const ProjectPage = () => {
     <div className="container mx-auto py-10">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold">Project page</h1>
-          <Link to="/addfund" className="ml-1">
+          <Link to="/addproject" className="ml-1">
             <Button  className="ml-1">Add project</Button>
           </Link>
       </div>      

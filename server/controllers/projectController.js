@@ -30,10 +30,10 @@ const getProject=async(req,res)=>{
 
 //create a new project
 const createProject=async (req,res)=>{
-    const {name,budget,utlized_amount,variance,status}=req.body
+    const {name,budget}=req.body
 
     try{
-        const project=await Project.create({name,budget,utlized_amount,variance,status})
+        const project=await Project.create({name,budget})
         res.status(200).json({project})
     }catch(error){
         res.status(400).json({error:error.message})

@@ -8,6 +8,7 @@ import Navbar from './components/navbar';
 import AddPage from './page/add-from/AddProject';
 import AddFund from './page/add-from/AddFund';
 import CostPage from './page/costs/CostPage';
+import AddCost from './page/add-from/AddCost';
 
 
 
@@ -25,6 +26,7 @@ import CostPage from './page/costs/CostPage';
             <Route path='/costs' element={<CostPage />}/>
             <Route path='/addproject' element={<AddPage/>} />
             <Route path='/addfund' element={<AddFund/>} />
+            <Route path='/addcost' element={<AddCost/>} />
           </Routes>   
         </BrowserRouter>
     </div>

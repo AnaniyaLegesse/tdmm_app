@@ -35,7 +35,7 @@ const CostPage = () => {
     <div className="container mx-auto py-10">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold">Cost page</h1>
-          <Link to="/addfund" className="ml-1">
+          <Link to="/addcost" className="ml-1">
             <Button  className="ml-1">Add Cost</Button>
           </Link>
       </div>      

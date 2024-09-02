@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+ 
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -12,26 +13,17 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { useState } from "react"
-
 
 
 const formSchema = z.object({
     name: z.string().min(2, {
       message: " name must be at least 2 characters.",
     }),
+    amount: z.coerce.number(),
+    project:z.coerce.string()
 
-    amount: z.coerce.number(), // Ensure amount is a positive number
-    fund_type: z.string(),
-  
   })
-
-
-const AddFund = () => {
-  // const [name,setName]=useState<string>("")
-  // const [amount,setAmount]=useState<number>()
-  // const [project,setProject]=useState<string>("")
-
+const AddCost = () => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -41,25 +33,27 @@ const AddFund = () => {
       })
     
       const onSubmit= async(values: z.infer<typeof formSchema>) =>{
-              const response = await fetch("http://localhost:4000/api/funds", {
-                method: "POST",
+
+              const response=await fetch('http://localhost:4000/api/costs',{
+                method:'POST',
                 body:JSON.stringify(values),
                 headers:{
                   'Content-Type':'application/json'
-                }  
+                }
               })
 
               const json=await response.json()
 
               if(response.ok){
-                console.log("new fund added",json)
-              }       
+                console.log('new cost added successfully', json)
+              }
+               
       }
       
       
     return ( 
       <div className="mt-10 w-[50%]">
-          <h1 className="text-xl font-semibold">Add new Fund here!</h1>
+          <h1 className="text-xl font-semibold">Add new Cost!</h1>
           <div className="mt-10 ">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="text-left space-y-8">
@@ -72,11 +66,8 @@ const AddFund = () => {
                         <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter your donner name." {...field} />
+                                <Input placeholder="Enter your cost name." {...field} />
                             </FormControl>
-                            <FormDescription>
-                                
-                            </FormDescription>
                             <FormMessage />
                         </FormItem>
                     )}
@@ -90,7 +81,7 @@ const AddFund = () => {
                         <FormItem>
                             <FormLabel>Amount</FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter the amount of donation." {...field} />
+                                <Input placeholder="Enter the amount." {...field} />
                             </FormControl>
                             <FormDescription>
                                  
@@ -103,12 +94,12 @@ const AddFund = () => {
                  {/* type FIELD */}
                  <FormField
                     control={form.control}
-                    name="fund_type"
+                    name="project"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Fund Type</FormLabel>
+                            <FormLabel>Project</FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter the Type of donation." {...field} />
+                                <Input placeholder="Enter which project it belongs." {...field} />
                             </FormControl>
                             <FormDescription>
                                  
@@ -127,4 +118,4 @@ const AddFund = () => {
      );
 }
  
-export default AddFund;
+export default AddCost;

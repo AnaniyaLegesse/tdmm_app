@@ -16,22 +16,35 @@ import { Input } from "@/components/ui/input"
 
 
 const formSchema = z.object({
-    projectname: z.string().min(2, {
-      message: "projectname must be at least 2 characters.",
+    name: z.string().min(2, {
+      message: "name must be at least 2 characters.",
     }),
-    budget: z.number()
+    budget: z.coerce.number()
   })
 const AddProject = () => {
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-          projectname: "",
+          name: "",
         },
       })
     
-      function onSubmit(values: z.infer<typeof formSchema>) {
-               console.log(values)
+      const onSubmit = async(values: z.infer<typeof formSchema>) =>{
+
+            const response=await fetch('http://localhost:4000/api/projects',{
+              method:'POST',
+              body:JSON.stringify(values),
+              headers:{
+                'Content-Type':'application/json'
+              }
+            })
+
+            const json=await response.json()
+            if(response.ok){
+              console.log('new project added successfully', json)
+            }
+               
       }
       
       
@@ -46,16 +59,13 @@ const AddProject = () => {
                   {/* NAME FIELD */}
                   <FormField
                       control={form.control}
-                      name="projectname"
+                      name="name"
                       render={({ field }) => (
                           <FormItem>
                               <FormLabel>Project name</FormLabel>
                               <FormControl>
-                                  <Input placeholder="Project 101" {...field} />
+                                  <Input placeholder="Enter project name" {...field} />
                               </FormControl>
-                              <FormDescription>
-                                  Enter your project name.
-                              </FormDescription>
                               <FormMessage />
                           </FormItem>
                       )}
@@ -69,11 +79,8 @@ const AddProject = () => {
                           <FormItem>
                               <FormLabel>Budget</FormLabel>
                               <FormControl>
-                                  <Input placeholder="$ 100000" {...field} />
+                                  <Input placeholder="Enter the buget allocated fro the project." {...field} />
                               </FormControl>
-                              <FormDescription>
-                                  Enter the buget allocated fro the project.
-                              </FormDescription>
                               <FormMessage />
                           </FormItem>
                       )}
