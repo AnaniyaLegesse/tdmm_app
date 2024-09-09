@@ -60,10 +60,17 @@ export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
         </Button>
       )
     },
+    cell: ({ row }) => {
+      
+      return (
+          <div className="text-left ml-5 font-medium">
+            {row.getValue("name")}
+            </div>)
+    },
   },
   {
     accessorKey: "budget",
-    header: () => <div className="text-right">Budget</div>,
+    header: () => <div className="text-left">Budget</div>,
     cell: ({ row }) => {
       const budget = parseFloat(row.getValue("budget"))
       const formatted = new Intl.NumberFormat("en-US", {
@@ -71,12 +78,12 @@ export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
         currency: "USD",
       }).format(budget)
  
-      return <div className="text-right font-medium">{formatted}</div>
+      return <div className="text-left font-medium">{formatted}</div>
     },
   },
   {
     accessorKey: "utlized_amount",
-    header: () => <div className="text-right">Utlized Amount</div>,
+    header: () => <div className="text-left">Utlized Amount</div>,
     cell: ({ row }) => {
       const utlized_amount = parseFloat(row.getValue("utlized_amount"))
       const formatted = new Intl.NumberFormat("en-US", {
@@ -84,12 +91,12 @@ export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
         currency: "USD",
       }).format(utlized_amount)
  
-      return <div className="text-right font-medium">{formatted}</div>
+      return <div className="text-left font-medium">{formatted}</div>
     },
   },
   {
     accessorKey: "variance",
-    header: () => <div className="text-right">Variance</div>,
+    header: () => <div className="text-left">Variance</div>,
     cell: ({ row }) => {
       const variance = parseFloat(row.getValue("variance"))
       const formatted = new Intl.NumberFormat("en-US", {
@@ -97,18 +104,26 @@ export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
         currency: "USD",
       }).format(variance)
  
-      return <div className="text-right font-medium">{formatted}</div>
+      return <div className="text-left font-medium">{formatted}</div>
     },
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: () => <div className="text-left">Status</div>,
+    cell: ({ row }) => {
+  
+      return (
+            <div className="text-left font-medium">
+              {row.getValue("status")}
+            </div>
+              )
+    },
   },
   
     
   {
     id: "actions",
-    header: "More",
+    header: () => <div className="text-left">More</div>,
     cell: ({ row }) => {
       const payment = row.original
  
@@ -120,7 +135,7 @@ export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="start">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(payment.id)}
@@ -169,6 +184,7 @@ export const FundPageColumns: ColumnDef<FundPageData>[] = [
     enableSorting: false,
     enableHiding: false,
   },
+
   {
     accessorKey: "name",
    
@@ -183,10 +199,17 @@ export const FundPageColumns: ColumnDef<FundPageData>[] = [
         </Button>
       )
     },
+    cell: ({ row }) => {
+      
+      return (
+          <div className="text-left ml-5 font-medium">
+            {row.getValue("name")}
+            </div>)
+    },
   },
   {
     accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    header: () => <div className="text-left">Amount</div>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"))
       const formatted = new Intl.NumberFormat("en-US", {
@@ -194,17 +217,24 @@ export const FundPageColumns: ColumnDef<FundPageData>[] = [
         currency: "USD",
       }).format(amount)
  
-      return <div className="text-right font-medium">{formatted}</div>
+      return <div className="text-left font-medium">{formatted}</div>
     },
   },
   
   {
     accessorKey: "fund_type",
-    header: "Fund type",
+    header: () => <div className="text-left">Fund type</div>,
+    cell: ({ row }) => {
+      
+      return (
+          <div className="text-left font-medium">
+            {row.getValue("fund_type")}
+            </div>)
+    },
   },
   {
     accessorKey: "date",
-    header: "Date",
+    header: () => <div className="text-left">Date</div>,
   },
     
   {
@@ -221,7 +251,7 @@ export const FundPageColumns: ColumnDef<FundPageData>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="start">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(payment.id)}
@@ -248,7 +278,7 @@ export type CostPageData = {
 }
 
 export const CostPageColumns: ColumnDef<CostPageData>[] = [
-  {
+   {
     id: "select",
     header: ({ table }) => (
       <Checkbox
@@ -270,6 +300,7 @@ export const CostPageColumns: ColumnDef<CostPageData>[] = [
     enableSorting: false,
     enableHiding: false,
   },
+  
   {
     accessorKey: "name",
    
@@ -284,10 +315,17 @@ export const CostPageColumns: ColumnDef<CostPageData>[] = [
         </Button>
       )
     },
+    cell: ({ row }) => {
+      
+      return (
+          <div className="text-left ml-5 font-medium">
+            {row.getValue("name")}
+            </div>)
+    },
   },
   {
     accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    header: () => <div className="text-left">Amount</div>,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"))
       const formatted = new Intl.NumberFormat("en-US", {
@@ -295,17 +333,24 @@ export const CostPageColumns: ColumnDef<CostPageData>[] = [
         currency: "USD",
       }).format(amount)
  
-      return <div className="text-right font-medium">{formatted}</div>
+      return <div className="text-left font-medium">{formatted}</div>
     },
   },
   
   {
     accessorKey: "project",
-    header: "Project",
+    header: () => <div className="text-left">Project</div>,
+    cell: ({ row }) => {
+      
+      return (
+          <div className="text-left font-medium">
+            {row.getValue("project")}
+            </div>)
+    },
   },
   {
     accessorKey: "date",
-    header: "Date",
+    header: () => <div className="text-left">Date</div>,
   },
     
   {

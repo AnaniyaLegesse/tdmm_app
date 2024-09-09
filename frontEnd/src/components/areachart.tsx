@@ -17,27 +17,25 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
+  { month: "2007", budget: 305, cost: 200 },
+  { month: "2008", budget: 237, cost: 120 },
+  { month: "2009", budget: 73, cost: 190 },
+  { month: "2010", budget: 209, cost: 130 },
+  { month: "2011", budget: 214, cost: 140 },
+  { month: "2012", budget: 186, cost: 80 },
+  { month: "2013", budget: 305, cost: 200 },
+  { month: "2014", budget: 237, cost: 120 },
+  { month: "2015", budget: 73, cost: 190 },
+  { month: "2016", budget: 209, cost: 130 },
 ]
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  budget: {
+    label: "Budget",
     color: "hsl(var(--chart-1))",
   },
-  mobile: {
-    label: "Mobile",
+  cost: {
+    label: "Cost",
     color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig
@@ -46,9 +44,9 @@ export function Areachart() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Area Chart - Stacked</CardTitle>
-        <CardDescription>
-          Showing total visitors for the last 6 months
+        <CardTitle className="flex items-center gap-2 ">Budget vs Utilized</CardTitle>
+        <CardDescription className="flex items-center gap-2 ">
+          Showing project budget and utilized amount variation over the past 10 years.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -67,26 +65,26 @@ export function Areachart() {
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
+              tickFormatter={(value) => value.slice(0, 4)}
             />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent indicator="dot" />}
             />
             <Area
-              dataKey="mobile"
+              dataKey="cost"
               type="natural"
-              fill="var(--color-mobile)"
+              fill="var(--color-cost)"
               fillOpacity={0.4}
-              stroke="var(--color-mobile)"
+              stroke="var(--color-cost)"
               stackId="a"
             />
             <Area
-              dataKey="desktop"
+              dataKey="budget"
               type="natural"
-              fill="var(--color-desktop)"
+              fill="var(--color-budget)"
               fillOpacity={0.4}
-              stroke="var(--color-desktop)"
+              stroke="var(--color-budget)"
               stackId="a"
             />
           </AreaChart>
@@ -96,10 +94,10 @@ export function Areachart() {
         <div className="flex w-full items-start gap-2 text-sm">
           <div className="grid gap-2">
             <div className="flex items-center gap-2 font-medium leading-none">
-              Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+              Trending up by 5.2% this year <TrendingUp className="h-4 w-4" />
             </div>
             <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              January - June 2024
+              2007 - 2016 EC
             </div>
           </div>
         </div>
