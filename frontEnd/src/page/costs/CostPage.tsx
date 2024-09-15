@@ -10,6 +10,7 @@ type Cost={
   name:string;
   amount:number;
   project:string;
+  createdAt: string;
 };
 
 const CostPage = () => {

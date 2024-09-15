@@ -159,6 +159,7 @@ export type FundPageData = {
   name: string
   amount: number
   fund_type: String
+  createdAt: string
 }
 
 export const FundPageColumns: ColumnDef<FundPageData>[] = [
@@ -233,8 +234,15 @@ export const FundPageColumns: ColumnDef<FundPageData>[] = [
     },
   },
   {
-    accessorKey: "date",
     header: () => <div className="text-left">Date</div>,
+    accessorKey: 'createdAt',
+    cell: ({ row }) => {
+      
+      return (
+          <div className="text-left font-medium">
+            {new Date(row.getValue("createdAt")).toLocaleDateString()}
+            </div>)
+    },
   },
     
   {
@@ -275,6 +283,7 @@ export type CostPageData = {
   name: string
   amount: number
   project: string
+  createdAt: string
 }
 
 export const CostPageColumns: ColumnDef<CostPageData>[] = [
@@ -349,8 +358,15 @@ export const CostPageColumns: ColumnDef<CostPageData>[] = [
     },
   },
   {
-    accessorKey: "date",
     header: () => <div className="text-left">Date</div>,
+    accessorKey: 'createdAt',
+    cell: ({ row }) => {
+      
+      return (
+          <div className="text-left font-medium">
+            {new Date(row.getValue("createdAt")).toLocaleDateString()}
+            </div>)
+    },
   },
     
   {
