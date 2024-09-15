@@ -1,4 +1,5 @@
 const Cost=require('../models/costModel')
+const Project=require('../models/projectModel')
 const mongoose= require('mongoose')
 
 
@@ -33,7 +34,7 @@ const createCost=async (req,res)=>{
     const {name,amount,project}=req.body
 
     try{
-        const cost=await Cost.create({name,amount,project})
+        const cost= await Cost.create({name,amount,project})
         res.status(200).json({cost})
     }catch(error){
         res.status(400).json({error:error.message})
@@ -79,6 +80,17 @@ const updateCost=async (req,res)=>{
      res.status(200).json(cost)
 }
 
+const updateUtilizedAmount = async (projectId) => {
+    try {
+      const costs = await Cost.find({ project: projectId });
+      const totalUtilized = costs.reduce((total, cost) => total + cost.amount, 0);
+      console.log(`Total utilized amount for project ${projectId}:`, totalUtilized); // Debugging line
+      await Project.findByIdAndUpdate(projectId, { utilized_amount: totalUtilized });
+    } catch (error) {
+      console.error('Error updating utilized amount:', error);
+    }
+  };
+  
 
 module.exports={
     getCosts,

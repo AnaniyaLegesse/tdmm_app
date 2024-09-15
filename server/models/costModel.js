@@ -1,4 +1,5 @@
 const mongoose=require('mongoose')
+const Project = require('./projectModel');
 
 const Schema=mongoose.Schema
 
@@ -12,8 +13,9 @@ const costSchema=new Schema({
         required:true
     },
     project:{
-        type:String,
-        required:true
+        type: Schema.Types.ObjectId,
+        ref: 'Project',
+        required: true
     }
 },{timestamps:true})
 

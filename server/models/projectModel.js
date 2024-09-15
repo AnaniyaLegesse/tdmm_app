@@ -1,4 +1,5 @@
 const mongoose=require('mongoose')
+const Cost = require('./costModel'); 
 
 const Schema=mongoose.Schema
 
@@ -11,15 +12,30 @@ const projectSchema=new Schema({
         type:Number,
         required:true
     },
-    utlized_amount:{
-        type:Number
+    utilized_amount: {
+        type: Number,
+        default: 0
     },
-    variance:{
-        type:Number
+    variance: {
+        type: Number,
+        default: function () {
+            return this.budget - this.utilized_amount;
+        }
     },
     status:{
-        type:String
+        type:String,
+        default: function () {
+            if (this.variance > 0) {
+                return this.status = 'Under Budget';
+            } else if (this.variance === 0) {
+                return this.status = 'At Budget';
+            } else {
+                return this.status = 'Over Budget'; // Optional for over budget cases
+            }
+        }
     },
-},{timestamps:true})
+},{timestamps:true});
+
+
 
 module.exports=mongoose.model('Project',projectSchema)
