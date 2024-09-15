@@ -12,6 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select"; 
 import { useState } from "react"
 
 
@@ -22,7 +23,7 @@ const formSchema = z.object({
     }),
 
     amount: z.coerce.number(), // Ensure amount is a positive number
-    fund_type: z.string(),
+    fund_type: z.enum(['restricted', 'unrestricted']),
   
   })
 
@@ -60,7 +61,7 @@ const AddFund = () => {
     return ( 
       <div className="mt-10 w-[50%]">
           <h1 className="text-xl font-semibold">Add new Fund here!</h1>
-          <div className="mt-10 ">
+          <div className="mt-10">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="text-left space-y-8">
 
@@ -108,7 +109,15 @@ const AddFund = () => {
                         <FormItem>
                             <FormLabel>Fund Type</FormLabel>
                             <FormControl>
-                                <Input placeholder="Enter the Type of donation." {...field} />
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select a Fund type" />
+                              </SelectTrigger>
+                              <SelectContent>
+                              <SelectItem value="restricted">Restricted</SelectItem>
+                              <SelectItem value="unrestricted">Unrestricted</SelectItem>
+                              </SelectContent>
+                            </Select>
                             </FormControl>
                             <FormDescription>
                                  
