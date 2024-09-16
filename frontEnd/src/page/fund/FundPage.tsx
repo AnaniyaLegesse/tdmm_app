@@ -11,6 +11,7 @@ type Fund={
   name:string;
   amount:number; 
   fund_type:string;
+  createdAt: string;
 };
 
 
@@ -34,7 +35,7 @@ const FundPage = ()=> {
   }, []);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto ">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold">Fund page</h1>
           <Link to="/addfund" className="ml-1">

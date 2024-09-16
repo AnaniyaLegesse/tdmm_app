@@ -33,7 +33,7 @@ const CostPage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold">Cost page</h1>
           <Link to="/addcost" className="ml-1">

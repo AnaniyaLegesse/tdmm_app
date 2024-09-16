@@ -34,7 +34,7 @@ const ProjectPage = () => {
   }, []);
 
   return ( 
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold">Project page</h1>
           <Link to="/addproject" className="ml-1">
