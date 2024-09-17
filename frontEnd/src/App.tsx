@@ -25,7 +25,7 @@ import Sidebar from './components/Sidebar';
         </div>
         <div className="flex flex-col">
          <Navbar/>
-         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+         <main className="flex flex-1 flex-col gap-4 p-4 bg-muted/40 lg:gap-6 lg:p-6">
             <Routes>
               <Route path='/' element={<HomePage />} />
               <Route path='/projects' element={<ProjectPage />} />

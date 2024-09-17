@@ -33,8 +33,8 @@ const CostPage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto">
-      <div className="flex justify-between">
+    <div className="container mx-autorounded-lg bg-white border border-dashed shadow-sm" x-chunk="dashboard-02-chunk-1">
+      <div className="flex justify-between mt-4">
         <h1 className="text-xl font-semibold">Cost page</h1>
           <Link to="/addcost" className="ml-1">
             <Button  className="ml-1">Add Cost</Button>

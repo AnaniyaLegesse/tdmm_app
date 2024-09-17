@@ -14,7 +14,7 @@ import { CircleUser, Home, Menu, Package, Users } from 'lucide-react'
  const Navbar = () => {
 
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
+    <header className="flex h-14 items-center gap-4 border-b bg-white px-4 lg:h-[60px] lg:px-6">
           <Sheet>
             <SheetTrigger asChild>
               <Button
@@ -32,15 +32,15 @@ import { CircleUser, Home, Menu, Package, Users } from 'lucide-react'
                   href="#"
                   className="flex items-center gap-2 text-lg font-semibold"
                 >
-                  <img src="/logoblue.svg" className="h-6 w-6" alt="FetanPay Logo" />
-                  <span className="sr-only">Fetan Pay</span>
+                  <img src="/logoblue.svg" className="h-6 w-6" alt="TDMM Logo" />
+                  <span className="sr-only">TDMM</span>
                 </a>
                 <a
                   href="#"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <Home className="h-5 w-5" />
-                  Dashboard
+                  Home
                 </a>
             
                 <a
@@ -48,14 +48,21 @@ import { CircleUser, Home, Menu, Package, Users } from 'lucide-react'
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <Users className="h-5 w-5" />
-                  Payee
+                  Project
                 </a>
                 <a
                   href="#"
                   className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
                 >
                   <Package className="h-5 w-5" />
-                  Payment
+                  Fund
+                </a>
+                <a
+                  href="#"
+                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                >
+                  <Package className="h-5 w-5" />
+                  cost
                 </a>
               </nav> 
             </SheetContent>
@@ -64,7 +71,6 @@ import { CircleUser, Home, Menu, Package, Users } from 'lucide-react'
             <form>
               <div className="relative">
                 <h1 className="text-1xl font-semibold">Dashboard</h1>
-    
               </div>
             </form>
           </div>

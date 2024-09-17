@@ -35,8 +35,8 @@ const FundPage = ()=> {
   }, []);
 
   return (
-    <div className="container mx-auto ">
-      <div className="flex justify-between">
+    <div className="container mx-auto rounded-lg bg-white border border-dashed shadow-sm" x-chunk="dashboard-02-chunk-1">
+      <div className="flex justify-between mt-4">
         <h1 className="text-xl font-semibold">Fund page</h1>
           <Link to="/addfund" className="ml-1">
             <Button  className="ml-1">Add Fund</Button>
