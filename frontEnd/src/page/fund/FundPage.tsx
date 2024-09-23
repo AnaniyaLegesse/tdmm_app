@@ -35,8 +35,8 @@ const FundPage = ()=> {
   }, []);
 
   return (
-    <div className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
-      <div className="flex justify-between mt-4">
+    <div className="flex flex-1 flex-col p-4 md:gap-8 md:p-8">
+      <div className="flex justify-between">
         <h1 className="text-xl font-semibold">Fund page</h1>
           <Link to="/addfund" className="ml-1">
             <Button  className="ml-1">Add Fund</Button>
