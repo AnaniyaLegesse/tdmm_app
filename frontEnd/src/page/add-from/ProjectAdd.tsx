@@ -1,12 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
- 
+
 import { Button } from "@/components/ui/button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,46 +23,51 @@ import { Input } from "@/components/ui/input"
 
 
 const formSchema = z.object({
-    name: z.string().min(2, {
-      message: "name must be at least 2 characters.",
-    }),
-    budget: z.coerce.number()
+  name: z.string().min(2, {
+    message: "name must be at least 2 characters.",
+  }),
+  budget: z.coerce.number()
+})
+
+export function AddProject() {
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+    },
   })
-const AddProject = () => {
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-          name: "",
-        },
-      })
-    
-      const onSubmit = async(values: z.infer<typeof formSchema>) =>{
+  const onSubmit = async(values: z.infer<typeof formSchema>) =>{
 
-            const response=await fetch('http://localhost:4000/api/projects',{
-              method:'POST',
-              body:JSON.stringify(values),
-              headers:{
-                'Content-Type':'application/json'
-              }
-            })
+        const response=await fetch('http://localhost:4000/api/projects',{
+          method:'POST',
+          body:JSON.stringify(values),
+          headers:{
+            'Content-Type':'application/json'
+          }
+        })
 
-            const json=await response.json()
-            if(response.ok){
-              console.log('new project added successfully', json)
-            }
-               
-      }
-      
-      
-    return ( 
-        <div className="mt-10 w-[50%]">
-          <h1 className="text-xl font-semibold">Add new Project here!</h1>
-          <div className="mt-10 ">
-            
-              <Form {...form}>
+        const json=await response.json()
+        if(response.ok){
+          console.log('new project added successfully', json)
+        }         
+  }
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button >+ Add New Project</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle>Add New Project</DialogTitle>
+          <DialogDescription>
+            Create a new Project here. Click save when you're done.
+          </DialogDescription>
+        </DialogHeader>
+        <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="text-left space-y-8">
-
                   {/* NAME FIELD */}
                   <FormField
                       control={form.control}
@@ -89,9 +101,8 @@ const AddProject = () => {
                   <Button type="submit">Submit</Button>
                 </form>
               </Form>
-          </div>
-        </div>
-     );
+       
+      </DialogContent>
+    </Dialog>
+  )
 }
- 
-export default AddProject;

@@ -2,7 +2,7 @@ import { projectPageColumns } from "@/components/fund-table/columns";
 import { DataTable } from "@/components/fund-table/data-table";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { AddProject } from "../add-from/ProjectAdd";
 
 type Project={
   _id:string;
@@ -37,9 +37,7 @@ const ProjectPage = () => {
     <div className="flex flex-1 flex-col p-4 md:gap-4 md:p-8">
       <div className="flex justify-between">
         <h1 className="text-xl font-semibold ">Project page</h1>
-          <Link to="/addproject" className="ml-1">
-            <Button  className="ml-1">Add project</Button>
-          </Link>
+        <AddProject/>
       </div>      
       <DataTable columns={projectPageColumns} data={projects} />
     </div>
