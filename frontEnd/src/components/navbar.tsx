@@ -1,79 +1,92 @@
 import React from 'react'
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-  } from "@/components/ui/dropdown-menu"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Button } from './ui/button'
-import { CircleUser, Home, Menu, Package, Users } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import {  CircleUser,  Menu, Package2,  Search } from 'lucide-react'
+import { Link } from 'react-router-dom'
+
+const PageLinks=[
+    {path:"/", label:"Dashboard"},
+    {path:"/projects", label:"Projects"},
+    {path:"/funds", label:"Funds"},
+    {path:"/costs", label:"Costs"},
+    {path:"/", label:"Analytics"},
+
+
+]
 
  const Navbar = () => {
-
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-white px-4 lg:h-[60px] lg:px-6">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="shrink-0 md:hidden"
-              >
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle navigation menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="flex flex-col">
-              <nav className="grid gap-2 text-lg font-medium">
-                <a
-                  href="#"
-                  className="flex items-center gap-2 text-lg font-semibold"
+    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+        <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+            <Link
+                to="/"
+                className="flex items-center gap-2 text-lg font-semibold md:text-base"
+            >
+                <Package2 className="h-6 w-6" />
+                <span className="sr-only">Acme Inc</span>
+            </Link>
+
+            {PageLinks.map((link) => (
+                <Link
+                    to={link.path}
+                    className="text-foreground transition-colors hover:text-foreground"
+                    key={link.label}
                 >
-                  <img src="/logoblue.svg" className="h-6 w-6" alt="TDMM Logo" />
-                  <span className="sr-only">TDMM</span>
-                </a>
-                <a
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
+                    {link.label}
+                </Link>  
+
+            ))}
+          
+          
+        </nav>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              className="shrink-0 md:hidden"
+            >
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle navigation menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left">
+            <nav className="grid gap-6 text-lg font-medium">
+                <Link
+                    to="/"
+                    className="flex items-center gap-2 text-lg font-semibold"
                 >
-                  <Home className="h-5 w-5" />
-                  Home
-                </a>
-            
-                <a
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Users className="h-5 w-5" />
-                  Project
-                </a>
-                <a
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Package className="h-5 w-5" />
-                  Fund
-                </a>
-                <a
-                  href="#"
-                  className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Package className="h-5 w-5" />
-                  cost
-                </a>
-              </nav> 
-            </SheetContent>
-          </Sheet>
-          <div className="w-full flex-1">
-            <form>
-              <div className="relative">
-                <h1 className="text-1xl font-semibold">Dashboard</h1>
-              </div>
-            </form>
-          </div>
+                    <Package2 className="h-6 w-6" />
+                    <span className="sr-only">Acme Inc</span>
+                </Link>
+
+                {PageLinks.map((link) => (
+                    <Link
+                        to={link.path}
+                        className="text-muted-foreground hover:text-foreground"
+                        key={link.label}
+                    >
+                        {link.label}
+                    </Link>  
+
+                ))}
+             
+            </nav>
+          </SheetContent>
+        </Sheet>
+        <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+          <form className="ml-auto flex-1 sm:flex-initial">
+            <div className="relative">
+              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <Input
+                type="search"
+                placeholder="Search products..."
+                className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+              />
+            </div>
+          </form>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
@@ -90,7 +103,8 @@ import { CircleUser, Home, Menu, Package, Users } from 'lucide-react'
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-        </header>
+        </div>
+      </header>
   )
 }
 

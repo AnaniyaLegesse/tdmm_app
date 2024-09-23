@@ -1,16 +1,15 @@
 
 import './App.css'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import HomePage from './page/home/HomePage';
+import { BrowserRouter, Routes, Route,} from "react-router-dom";
+import Navbar from './components/Navbar';
 import ProjectPage from './page/project/ProjectPage';
 import FundPage from './page/fund/FundPage';
-import Navbar from './components/Navbar';
-
 import AddPage from './page/add-from/AddProject';
 import AddFund from './page/add-from/AddFund';
 import CostPage from './page/costs/CostPage';
 import AddCost from './page/add-from/AddCost';
-import Sidebar from './components/Sidebar';
+import  Dashboard  from './page/home/DashboardPage';
+
 
 
 
@@ -18,16 +17,12 @@ import Sidebar from './components/Sidebar';
  
   
   return (
-      <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+      <div className="flex min-h-screen w-full flex-col">
         <BrowserRouter>
-        <div className="hidden border-r bg-muted/40 md:block">
-        <Sidebar />
-        </div>
-        <div className="flex flex-col">
-         <Navbar/>
-         <main className="flex flex-1 flex-col gap-4 p-4 bg-muted/40 lg:gap-6 lg:p-6">
+        <Navbar/>
+         <div>
             <Routes>
-              <Route path='/' element={<HomePage />} />
+              <Route path='/' element={<Dashboard />} />
               <Route path='/projects' element={<ProjectPage />} />
               <Route path='/funds' element={<FundPage />}/>
               <Route path='/costs' element={<CostPage />}/>
@@ -35,8 +30,8 @@ import Sidebar from './components/Sidebar';
               <Route path='/addfund' element={<AddFund/>} />
               <Route path='/addcost' element={<AddCost/>} />
             </Routes> 
-          </main>
-        </div>  
+          </div>
+         
         </BrowserRouter>
     </div>
   )
