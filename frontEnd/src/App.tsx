@@ -2,13 +2,13 @@
 import './App.css'
 import { BrowserRouter, Routes, Route,} from "react-router-dom";
 import Navbar from './components/Navbar';
-import ProjectPage from './page/project/ProjectPage';
-import FundPage from './page/fund/FundPage';
-import AddPage from './page/add-from/AddFund';
-import AddFund from './page/add-from/AddCost';
-import CostPage from './page/costs/CostPage';
+import ProjectPage from './page/ProjectPage';
+import CostPage from './page/CostPage';
+import Dashboard  from './page/DashboardPage';
+import FundPage from './page/FundPage';
+import AddFund from './page/add-from/AddFund';
 import AddCost from './page/add-from/AddCost';
-import  Dashboard  from './page/home/DashboardPage';
+import { AddProject } from './page/add-from/AddProject';
 
 
 
@@ -26,7 +26,7 @@ import  Dashboard  from './page/home/DashboardPage';
               <Route path='/projects' element={<ProjectPage />} />
               <Route path='/funds' element={<FundPage />}/>
               <Route path='/costs' element={<CostPage />}/>
-              <Route path='/addproject' element={<AddPage/>} />
+              <Route path='/addproject' element={<AddProject/>} />
               <Route path='/addfund' element={<AddFund/>} />
               <Route path='/addcost' element={<AddCost/>} />
             </Routes> 

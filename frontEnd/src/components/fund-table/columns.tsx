@@ -111,12 +111,29 @@ export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
     accessorKey: "status",
     header: () => <div className="text-left">Status</div>,
     cell: ({ row }) => {
-  
-      return (
-            <div className="text-left font-medium">
-              {row.getValue("status")}
-            </div>
-              )
+        const status=row.getValue("status")
+
+        switch(status){
+          case "Under Budget":
+            return (
+              <div className="text-left font-medium text-green-500">
+                {status}
+              </div>
+            );
+          case "Over Budge":
+            return (
+              <div className="text-left font-medium text-red-500">
+                {status}
+              </div>
+            )
+          case "At Budget":
+            return (
+              <div className="text-left font-medium text-yellow-500">
+                {status}
+              </div>
+                )
+        }
+
     },
   },
   
@@ -226,11 +243,16 @@ export const FundPageColumns: ColumnDef<FundPageData>[] = [
     accessorKey: "fund_type",
     header: () => <div className="text-left">Fund type</div>,
     cell: ({ row }) => {
-      
-      return (
-          <div className="text-left font-medium">
-            {row.getValue("fund_type")}
-            </div>)
+      const fundType=row.getValue("fund_type");
+      if(fundType==="restricted"){
+        return(
+          <div className="text-left font-medium text-red-500">Restricted</div>
+        )
+      }else{
+        return(
+          <div className="text-left font-medium text-green-500">Unrestricted</div>
+        )
+      }
     },
   },
   {

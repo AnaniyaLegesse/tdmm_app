@@ -5,11 +5,9 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select"; 
@@ -59,7 +57,7 @@ const AddFund = () => {
       
       
     return ( 
-      <div className="mt-10 w-[50%]">
+      <div className="m-10 w-[50%]">
           <h1 className="text-xl font-semibold">Add new Fund here!</h1>
           <div className="mt-10">
             <Form {...form}>
@@ -75,10 +73,6 @@ const AddFund = () => {
                             <FormControl>
                                 <Input placeholder="Enter your donner name." {...field} />
                             </FormControl>
-                            <FormDescription>
-                                
-                            </FormDescription>
-                            <FormMessage />
                         </FormItem>
                     )}
                  />
@@ -93,10 +87,6 @@ const AddFund = () => {
                             <FormControl>
                                 <Input placeholder="Enter the amount of donation." {...field} />
                             </FormControl>
-                            <FormDescription>
-                                 
-                            </FormDescription>
-                            <FormMessage />
                         </FormItem>
                     )}
                  />
@@ -119,10 +109,6 @@ const AddFund = () => {
                               </SelectContent>
                             </Select>
                             </FormControl>
-                            <FormDescription>
-                                 
-                            </FormDescription>
-                            <FormMessage />
                         </FormItem>
                     )}
                  />

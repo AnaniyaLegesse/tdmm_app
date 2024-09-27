@@ -72,8 +72,8 @@ const AddCost = () => {
   }
 
   return (
-    <div className="mt-10 w-[50%]">
-      <h1 className="text-xl font-semibold">Add new Cost!</h1>
+    <div className="m-10 w-[50%]">
+      <h1 className="text-xl  font-semibold">Add new Cost!</h1>
       <div className="mt-10">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="text-left space-y-8">
@@ -87,7 +87,6 @@ const AddCost = () => {
                   <FormControl>
                     <Input placeholder="Enter the cost name." {...field} />
                   </FormControl>
-                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -102,7 +101,6 @@ const AddCost = () => {
                   <FormControl>
                     <Input type="number" placeholder="Enter the amount." {...field} />
                   </FormControl>
-                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -128,7 +126,6 @@ const AddCost = () => {
                       </SelectContent>
                     </Select>
                   </FormControl>
-                  <FormMessage />
                 </FormItem>
               )}
             />

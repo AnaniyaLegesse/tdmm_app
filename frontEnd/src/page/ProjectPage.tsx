@@ -2,7 +2,7 @@ import { projectPageColumns } from "@/components/fund-table/columns";
 import { DataTable } from "@/components/fund-table/data-table";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { AddProject } from "../add-from/ProjectAdd";
+import { AddProject } from "./add-from/AddProject";
 
 type Project={
   _id:string;
