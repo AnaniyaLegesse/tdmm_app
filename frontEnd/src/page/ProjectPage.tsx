@@ -1,6 +1,5 @@
 import { projectPageColumns } from "@/components/fund-table/columns";
 import { DataTable } from "@/components/fund-table/data-table";
-import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
 import { AddProject } from "./add-from/AddProject";
 
@@ -9,7 +8,7 @@ type Project={
   id:string;
   name:string;
   budget: number;
-  utlized_amount: number;
+  utilized_amount: number;
   variance: number;
   status: string;
 };

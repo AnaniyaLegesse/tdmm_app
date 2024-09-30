@@ -11,7 +11,7 @@ const PageLinks=[
     {path:"/projects", label:"Projects"},
     {path:"/funds", label:"Funds"},
     {path:"/costs", label:"Costs"},
-    {path:"/", label:"Analytics"},
+    {path:"/analytics", label:"Analytics"},
 
 
 ]

@@ -9,6 +9,7 @@ import FundPage from './page/FundPage';
 import AddFund from './page/add-from/AddFund';
 import AddCost from './page/add-from/AddCost';
 import { AddProject } from './page/add-from/AddProject';
+import { AnalyticsPage } from './page/AnalyticsPage';
 
 
 
@@ -29,6 +30,8 @@ import { AddProject } from './page/add-from/AddProject';
               <Route path='/addproject' element={<AddProject/>} />
               <Route path='/addfund' element={<AddFund/>} />
               <Route path='/addcost' element={<AddCost/>} />
+              <Route path='/analytics' element={<AnalyticsPage/>} />
+
             </Routes> 
           </div>
          

@@ -3,6 +3,28 @@ const Project=require('../models/projectModel')
 const mongoose= require('mongoose')
 
 
+// Helper function to update utilized amount
+const updateUtilizedAmount = async (projectId) => {
+    try {
+        const project = await Project.findById(projectId);
+        if (!project) {
+            throw new Error('Project not found');
+        }
+
+        // Calculate the new utilized_amount
+        const costs = await Cost.find({ project: projectId });
+        project.utilized_amount = costs.reduce((total, cost) => total + cost.amount, 0);
+
+        // Save the project (this triggers the pre-save hook to update variance and status)
+        await project.save();
+
+        console.log(`Updated utilized amount, variance, and status for project ${projectId}`);
+    } catch (error) {
+        console.error('Error updating utilized amount:', error);
+    }
+};
+
+
 //get all Costs
 const getCosts=async(req,res)=>{
     const costs= await Cost.find({}).sort({createdAt:-1})
@@ -35,6 +57,10 @@ const createCost=async (req,res)=>{
 
     try{
         const cost= await Cost.create({name,amount,project})
+
+        // Update the utilized_amount for the project
+        await updateUtilizedAmount(project);
+
         res.status(200).json({cost})
     }catch(error){
         res.status(400).json({error:error.message})
@@ -56,6 +82,9 @@ const deleteCost=async (req,res)=>{
     if(!cost){
         return res.status(404).json({error:'No such Cost'})
      }
+
+     // Update the utilized_amount for the project after cost deletion
+    await updateUtilizedAmount(cost.project);
  
      res.status(200).json(cost)
 }
@@ -76,21 +105,14 @@ const updateCost=async (req,res)=>{
     if(!cost){
         return res.status(404).json({error:'No such Cost'})
      }
+
+      // Update the utilized_amount for the project after cost update
+    await updateUtilizedAmount(cost.project);
  
      res.status(200).json(cost)
 }
 
-const updateUtilizedAmount = async (projectId) => {
-    try {
-      const costs = await Cost.find({ project: projectId });
-      const totalUtilized = costs.reduce((total, cost) => total + cost.amount, 0);
-      console.log(`Total utilized amount for project ${projectId}:`, totalUtilized); // Debugging line
-      await Project.findByIdAndUpdate(projectId, { utilized_amount: totalUtilized });
-    } catch (error) {
-      console.error('Error updating utilized amount:', error);
-    }
-  };
-  
+
 
 module.exports={
     getCosts,

@@ -1,16 +1,14 @@
-const mongoose=require('mongoose')
-const Cost = require('./costModel'); 
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const Schema=mongoose.Schema
-
-const projectSchema=new Schema({
-    name:{
-        type:String,
-        required:true
+const projectSchema = new Schema({
+    name: {
+        type: String,
+        required: true
     },
-    budget:{
-        type:Number,
-        required:true
+    budget: {
+        type: Number,
+        required: true
     },
     utilized_amount: {
         type: Number,
@@ -18,24 +16,27 @@ const projectSchema=new Schema({
     },
     variance: {
         type: Number,
-        default: function () {
-            return this.budget - this.utilized_amount;
-        }
+        default: 0
     },
-    status:{
-        type:String,
-        default: function () {
-            if (this.variance > 0) {
-                return this.status = 'Under Budget';
-            } else if (this.variance === 0) {
-                return this.status = 'At Budget';
-            } else {
-                return this.status = 'Over Budget'; // Optional for over budget cases
-            }
-        }
+    status: {
+        type: String,
+        default: 'Under Budget'
     },
-},{timestamps:true});
+}, { timestamps: true });
 
+// Pre-save middleware to update variance and status before saving
+projectSchema.pre('save', function (next) {
+    this.variance = this.budget - this.utilized_amount;
 
+    if (this.variance > 0) {
+        this.status = 'Under Budget';
+    } else if (this.variance === 0) {
+        this.status = 'At Budget';
+    } else {
+        this.status = 'Over Budget';
+    }
 
-module.exports=mongoose.model('Project',projectSchema)
+    next();
+});
+
+module.exports = mongoose.model('Project', projectSchema);

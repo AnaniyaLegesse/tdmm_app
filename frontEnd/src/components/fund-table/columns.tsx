@@ -18,7 +18,7 @@ export type ProjectPageData = {
   id: string
   name: string
   budget: number
-  utlized_amount: number
+  utilized_amount: number
   variance: number
   status: string
 }
@@ -82,14 +82,14 @@ export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
     },
   },
   {
-    accessorKey: "utlized_amount",
+    accessorKey: "utilized_amount",
     header: () => <div className="text-left">Utlized Amount</div>,
     cell: ({ row }) => {
-      const utlized_amount = parseFloat(row.getValue("utlized_amount"))
+      const utilized_amount = parseFloat(row.getValue("utilized_amount"))
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",
-      }).format(utlized_amount)
+      }).format(utilized_amount)
  
       return <div className="text-left font-medium">{formatted}</div>
     },
