@@ -1,4 +1,4 @@
-
+import { useState, useEffect } from "react"
 import {
   Activity,
   ArrowUpRight,
@@ -12,7 +12,6 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -31,12 +30,7 @@ import {
 } from "@/components/ui/table"
 import { Link } from "react-router-dom"
 
-const CardData=[
-  {title:"Total Revenue", value:"$45,231", description:"Total amount of revenue", icon:<DollarSign className="h-4 w-4 text-muted-foreground" />},
-  {title:"Total Cost", value:"$25,998", description:"Total amount of cost", icon:<CreditCard className="h-4 w-4 text-muted-foreground" />},
-  {title:"Funds", value:"$50,456", description:"Total amount of Fund", icon:<Activity className="h-4 w-4 text-muted-foreground" />},
-  {title:"Projects", value:"+231", description:"Number of Projects", icon:<Users className="h-4 w-4 text-muted-foreground" />},
-]
+
 
 const RecentCosts=[
   {name:"travel", project:"project-564", amount:"$298"},
@@ -56,6 +50,47 @@ const RecentFunds=[
 
 
 const Dashboard=()=> {
+  const [totalCost, setTotalCost] = useState(0);
+  const [totalFunds, setTotalFunds] = useState(0);
+  const [projectCount, setProjectCount] = useState(0);
+  const totalRevenue = totalFunds - totalCost;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch costs
+        const costResponse = await fetch("http://localhost:4000/api/costs");
+        const costs = await costResponse.json();
+        const totalCostAmount = costs.reduce((total: any, cost:any) => total + cost.amount, 0);
+        setTotalCost(totalCostAmount);
+
+        // Fetch funds
+        const fundsResponse = await fetch("http://localhost:4000/api/funds");
+        const funds = await fundsResponse.json();
+        const totalFundsAmount = funds.reduce((total: any, fund:any) => total + fund.amount, 0);
+        setTotalFunds(totalFundsAmount);
+
+        // Fetch projects
+        const projectsResponse = await fetch("http://localhost:4000/api/projects");
+        const projects = await projectsResponse.json();
+        setProjectCount(projects.length); 
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const CardData=[
+    {title:"Projects", value:`+${projectCount}`, description:"Number of Projects", icon:<Users className="h-4 w-4 text-muted-foreground" />},
+    {title:"Total Cost", value:`$${totalCost.toLocaleString()}`, description:"Total amount of cost", icon:<CreditCard className="h-4 w-4 text-muted-foreground" />},
+    {title:"Funds", value:`$${totalFunds.toLocaleString()}`, description:"Total amount of Fund", icon:<Activity className="h-4 w-4 text-muted-foreground" />},
+    {title:"Total Revenue", value:`$${totalRevenue.toLocaleString()}`, description:"Total amount of revenue", icon:<DollarSign className="h-4 w-4 text-muted-foreground" />},
+
+  ]
+
   return (
       <div className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
