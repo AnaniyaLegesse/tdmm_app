@@ -1,12 +1,12 @@
+"use client"
 
-import { TrendingUp } from "lucide-react"
-import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
+import * as React from "react"
+import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -16,42 +16,86 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
+
+export const description = "An interactive line chart"
+
 const chartData = [
-  { month: "2007", budget: 305, cost: 200 },
-  { month: "2008", budget: 237, cost: 120 },
-  { month: "2009", budget: 73, cost: 190 },
-  { month: "2010", budget: 209, cost: 130 },
-  { month: "2011", budget: 214, cost: 140 },
-  { month: "2012", budget: 186, cost: 80 },
-  { month: "2013", budget: 305, cost: 200 },
-  { month: "2014", budget: 237, cost: 120 },
-  { month: "2015", budget: 73, cost: 190 },
-  { month: "2016", budget: 209, cost: 130 },
+  { date: "2024-04-01", desktop: 222, mobile: 150 },
+  { date: "2024-04-02", desktop: 97, mobile: 180 },
+  { date: "2024-04-03", desktop: 167, mobile: 120 },
+  { date: "2024-04-04", desktop: 242, mobile: 260 },
+  { date: "2024-04-05", desktop: 373, mobile: 290 },
+  { date: "2024-04-06", desktop: 301, mobile: 340 },
+  { date: "2024-04-07", desktop: 245, mobile: 180 },
+  { date: "2024-04-08", desktop: 409, mobile: 320 },
+  { date: "2024-04-09", desktop: 59, mobile: 110 },
+  { date: "2024-04-10", desktop: 261, mobile: 190 },
+  { date: "2024-04-11", desktop: 327, mobile: 350 },
+  { date: "2024-04-12", desktop: 292, mobile: 210 },
 ]
 
 const chartConfig = {
-  budget: {
-    label: "Budget",
+  views: {
+    label: "Page Views",
+  },
+  desktop: {
+    label: "Desktop",
     color: "hsl(var(--chart-1))",
   },
-  cost: {
-    label: "Cost",
+  mobile: {
+    label: "Mobile",
     color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig
 
-export function Areachart() {
+export function Cost_Areachart() {
+  const [activeChart, setActiveChart] =
+    React.useState<keyof typeof chartConfig>("desktop")
+
+  const total = React.useMemo(
+    () => ({
+      desktop: chartData.reduce((acc, curr) => acc + curr.desktop, 0),
+      mobile: chartData.reduce((acc, curr) => acc + curr.mobile, 0),
+    }),
+    []
+  )
+
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 ">Budget vs Utilized</CardTitle>
-        <CardDescription className="flex items-center gap-2 ">
-          Showing project budget and utilized amount variation over the past 10 years.
-        </CardDescription>
+      <CardHeader className="flex flex-col items-stretch space-y-0 border-b p-0 sm:flex-row">
+        <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
+          <CardTitle>Utilized amount cost</CardTitle>
+          <CardDescription>
+            Showing total cost utilized for the last 10 years
+          </CardDescription>
+        </div>
+        <div className="flex">
+          {["desktop", "mobile"].map((key) => {
+            const chart = key as keyof typeof chartConfig
+            return (
+              <button
+                key={chart}
+                data-active={activeChart === chart}
+                className="flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l data-[active=true]:bg-muted/50 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
+                onClick={() => setActiveChart(chart)}
+              >
+                <span className="text-xs text-muted-foreground">
+                  {chartConfig[chart].label}
+                </span>
+                <span className="text-lg font-bold leading-none sm:text-3xl">
+                  {total[key as keyof typeof total].toLocaleString()}
+                </span>
+              </button>
+            )
+          })}
+        </div>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
-          <AreaChart
+      <CardContent className="px-2 sm:p-6">
+        <ChartContainer
+          config={chartConfig}
+          className="aspect-auto h-[250px] w-full"
+        >
+          <LineChart
             accessibilityLayer
             data={chartData}
             margin={{
@@ -61,47 +105,44 @@ export function Areachart() {
           >
             <CartesianGrid vertical={false} />
             <XAxis
-              dataKey="month"
+              dataKey="date"
               tickLine={false}
               axisLine={false}
               tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 4)}
+              minTickGap={32}
+              tickFormatter={(value) => {
+                const date = new Date(value)
+                return date.toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                })
+              }}
             />
             <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent indicator="dot" />}
+              content={
+                <ChartTooltipContent
+                  className="w-[150px]"
+                  nameKey="views"
+                  labelFormatter={(value) => {
+                    return new Date(value).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })
+                  }}
+                />
+              }
             />
-            <Area
-              dataKey="cost"
-              type="natural"
-              fill="var(--color-cost)"
-              fillOpacity={0.4}
-              stroke="var(--color-cost)"
-              stackId="a"
+            <Line
+              dataKey={activeChart}
+              type="monotone"
+              stroke={`var(--color-${activeChart})`}
+              strokeWidth={2}
+              dot={false}
             />
-            <Area
-              dataKey="budget"
-              type="natural"
-              fill="var(--color-budget)"
-              fillOpacity={0.4}
-              stroke="var(--color-budget)"
-              stackId="a"
-            />
-          </AreaChart>
+          </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
-        <div className="flex w-full items-start gap-2 text-sm">
-          <div className="grid gap-2">
-            <div className="flex items-center gap-2 font-medium leading-none">
-              Trending up by 5.2% this year <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              2007 - 2016 EC
-            </div>
-          </div>
-        </div>
-      </CardFooter>
     </Card>
   )
 }
