@@ -108,13 +108,7 @@ const Dashboard = () => {
             </Button>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Cost</TableHead>
-                  <TableHead className="text-right">Amount</TableHead>
-                </TableRow>
-              </TableHeader>
+            <Table> 
               <TableBody>
                 {recentCosts.map((cost: any) => (
                   <TableRow key={cost._id}>
@@ -144,10 +138,6 @@ const Dashboard = () => {
           <CardContent className="grid gap-8">
             {recentFunds.map((fund: any) => (
               <div className="flex items-center gap-4" key={fund._id}>
-                {/* <Avatar className="hidden h-9 w-9 sm:flex">
-                  <AvatarImage src="/avatars/01.png" alt="Avatar" />
-                  <AvatarFallback>OM</AvatarFallback>
-                </Avatar> */}
                 <div className="grid gap-1">
                   <p className="text-sm font-medium leading-none">{fund.name}</p>
                   <p className="text-sm text-muted-foreground">{fund.fund_type}</p>

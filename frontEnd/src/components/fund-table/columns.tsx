@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
-import { ArrowUpDown } from "lucide-react"
+import { ArrowUpDown, Pencil, Trash2 } from "lucide-react"
 import { MoreHorizontal } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -260,13 +260,13 @@ export const FundPageColumns: ColumnDef<FundPageData>[] = [
             </div>)
     },
   },
-    
   {
     id: "actions",
-    header: "More",
+    header: () => <div className="text-left">More</div>,
     cell: ({ row }) => {
       const payment = row.original
- 
+    
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -276,18 +276,15 @@ export const FundPageColumns: ColumnDef<FundPageData>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment.id)} className="text-blue-500 gap-2">
+              <Pencil size={17}/> Edit
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-500 gap-2">
+              <Trash2 size={17}/> Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
   
@@ -351,6 +348,7 @@ export const CostPageColumns: ColumnDef<CostPageData>[] = [
             </div>)
     },
   },
+  
   {
     header: () => <div className="text-left">Date</div>,
     accessorKey: 'createdAt',
@@ -365,10 +363,11 @@ export const CostPageColumns: ColumnDef<CostPageData>[] = [
     
   {
     id: "actions",
-    header: "More",
+    header: () => <div className="text-left">More</div>,
     cell: ({ row }) => {
       const payment = row.original
- 
+    
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -377,20 +376,18 @@ export const CostPageColumns: ColumnDef<CostPageData>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
+          <DropdownMenuContent align="start">
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(payment.id)} className="text-blue-500 gap-2">
+              <Pencil size={17}/> Edit
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-500 gap-2">
+              <Trash2 size={17}/> Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
+  
   
 ]
