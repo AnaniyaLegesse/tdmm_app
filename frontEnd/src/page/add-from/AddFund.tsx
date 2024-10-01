@@ -2,6 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast"
 import {
   Form,
   FormControl,
@@ -10,8 +12,7 @@ import {
   FormLabel,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select"; 
-import { useState } from "react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"; 
 
 
 
@@ -27,9 +28,8 @@ const formSchema = z.object({
 
 
 const AddFund = () => {
-  // const [name,setName]=useState<string>("")
-  // const [amount,setAmount]=useState<number>()
-  // const [project,setProject]=useState<string>("")
+  const navigate = useNavigate();
+
 
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -48,11 +48,14 @@ const AddFund = () => {
                 }  
               })
 
-              const json=await response.json()
+              
 
               if(response.ok){
-                console.log("new fund added",json)
-              }       
+                toast.success('New Fund added successfully')
+                navigate("/funds");
+              }  else {
+                toast.error('Error adding new fund')
+              }     
       }
       
       

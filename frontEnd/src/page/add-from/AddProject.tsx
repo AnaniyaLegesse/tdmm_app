@@ -1,16 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import { Button } from "@/components/ui/button"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 import {
   Form,
   FormControl,
@@ -31,6 +24,8 @@ const formSchema = z.object({
 
 export function AddProject() {
 
+  const navigate = useNavigate();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -48,24 +43,19 @@ export function AddProject() {
           }
         })
 
-        const json=await response.json()
+        
         if(response.ok){
-          console.log('new project added successfully', json)
-        }         
+          toast.success('New Project added successfully')
+          navigate('/projects')
+        }   else {
+          toast.error('Error adding new Project')
+        }      
   }
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button >+ Add New Project</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Add New Project</DialogTitle>
-          <DialogDescription>
-            Create a new Project here. Click save when you're done.
-          </DialogDescription>
-        </DialogHeader>
+    <div className="m-10 w-[50%]">
+      <h1 className="text-xl  font-semibold">Add new Project!</h1>
+      <div className="mt-10">
         <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="text-left space-y-8">
                   {/* NAME FIELD */}
@@ -100,9 +90,8 @@ export function AddProject() {
 
                   <Button type="submit">Submit</Button>
                 </form>
-              </Form>
-       
-      </DialogContent>
-    </Dialog>
+        </Form>
+      </div>
+    </div>
   )
 }

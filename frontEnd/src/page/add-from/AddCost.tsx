@@ -2,16 +2,15 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { useState, useEffect } from "react"
- 
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
+  FormLabel
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select" // Assuming you have a Select component
@@ -28,7 +27,8 @@ const formSchema = z.object({
 })
 
 const AddCost = () => {
-  const [projects, setProjects] = useState([]) // State to store fetched projects
+  const [projects, setProjects] = useState([]) 
+  const navigate = useNavigate();
 
   // Fetch projects when component mounts
   useEffect(() => {
@@ -65,9 +65,11 @@ const AddCost = () => {
     const json = await response.json()
 
     if (response.ok) {
-      console.log('New cost added successfully', json)
+      toast.success('New cost added successfully')
+      navigate("/costs");
     } else {
       console.error('Error adding cost', json)
+      toast.error('Error adding new cost')
     }
   }
 

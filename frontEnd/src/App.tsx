@@ -1,4 +1,3 @@
-
 import './App.css'
 import { BrowserRouter, Routes, Route,} from "react-router-dom";
 import Navbar from './components/Navbar';
@@ -10,6 +9,7 @@ import AddFund from './page/add-from/AddFund';
 import AddCost from './page/add-from/AddCost';
 import { AddProject } from './page/add-from/AddProject';
 import { AnalyticsPage } from './page/AnalyticsPage';
+import { Toaster } from 'react-hot-toast';
 
 
 
@@ -34,8 +34,8 @@ import { AnalyticsPage } from './page/AnalyticsPage';
 
             </Routes> 
           </div>
-         
         </BrowserRouter>
+        <Toaster position="bottom-right" reverseOrder={false} />  
     </div>
   )
 }
