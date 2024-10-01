@@ -116,22 +116,16 @@ export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
         switch(status){
           case "Under Budget":
             return (
-              <div className="text-left font-medium text-green-500">
+              <Button variant="outline_success" size="sm">
                 {status}
-              </div>
+              </Button>
             );
           case "Over Budge":
             return (
-              <div className="text-left font-medium text-red-500">
+              <Button variant="outline_danger" size="sm">
                 {status}
-              </div>
+              </Button>
             )
-          case "At Budget":
-            return (
-              <div className="text-left font-medium text-yellow-500">
-                {status}
-              </div>
-                )
         }
 
     },
@@ -246,11 +240,11 @@ export const FundPageColumns: ColumnDef<FundPageData>[] = [
       const fundType=row.getValue("fund_type");
       if(fundType==="restricted"){
         return(
-          <div className="text-left font-medium text-red-500">Restricted</div>
+          <Button variant="outline_danger" size="sm">Restricted</Button>
         )
       }else{
         return(
-          <div className="text-left font-medium text-green-500">Unrestricted</div>
+          <Button variant="outline_success" size="sm">Unrestricted</Button>
         )
       }
     },

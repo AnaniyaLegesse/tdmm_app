@@ -30,11 +30,9 @@ projectSchema.pre('save', function (next) {
 
     if (this.variance > 0) {
         this.status = 'Under Budget';
-    } else if (this.variance === 0) {
-        this.status = 'At Budget';
-    } else {
+    } else if (this.variance <=0) {
         this.status = 'Over Budget';
-    }
+    } 
 
     next();
 });
