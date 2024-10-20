@@ -1,46 +1,78 @@
-import React from 'react'
 import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { Input } from '@/components/ui/input'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import {  CircleUser,  Menu, Package2,  Search } from 'lucide-react'
+import {  CircleUser,  Menu, Package2, } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu"
 
-const PageLinks=[
-    {path:"/", label:"Dashboard"},
+const genralPageLinks = [
+    {path:"/Peoplegroup", label:"People_Groups"},
+    {path:"/trainingmanual", label:"Training_Manuals"},
+    {path:"coordinators", label:"Coordinators"},
+]
+
+const FinancePageLinks=[
+    {path:"/finance", label:"OverAll"},
     {path:"/projects", label:"Projects"},
     {path:"/funds", label:"Funds"},
     {path:"/costs", label:"Costs"},
     {path:"/analytics", label:"Analytics"},
-
-
 ]
 
  const Navbar = () => {
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-white px-4 md:px-6">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
             <Link
                 to="/"
                 className="flex items-center gap-2 text-lg font-semibold md:text-base"
             >
-                <Package2 className="h-6 w-6" />
-                <span className="sr-only">Acme Inc</span>
+                <p className='text-foreground text-blue-950 font-bold'>TDMM</p>
+                
             </Link>
 
-            {PageLinks.map((link) => (
-                <Link
-                    to={link.path}
-                    className="text-foreground transition-colors hover:text-foreground"
-                    key={link.label}
-                >
-                    {link.label}
-                </Link>  
+            <NavigationMenu>
+              <NavigationMenuList className='gap-4'>
+                {genralPageLinks.map((link) => (
+                  <NavigationMenuItem key={link.label}>
+                    <Link   
+                      to={link.path}
+                      className="text-foreground transition-colors hover:text-foreground"
+                    > 
+                      {link.label}
+                    </Link>
+                  </NavigationMenuItem>
+                ))}
 
-            ))}
-          
-          
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="link"> Finance Team</Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    {FinancePageLinks.map((link) => (
+                            <Link
+                                to={link.path}
+                                className="text-foreground transition-colors hover:text-foreground"
+                                key={link.label}
+                            >
+                              <DropdownMenuItem>
+                                {link.label}
+                              </DropdownMenuItem>
+                                
+                            </Link>  
+
+                        ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+           </NavigationMenuList>
+           </NavigationMenu>   
         </nav>
+
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -62,7 +94,7 @@ const PageLinks=[
                     <span className="sr-only">Acme Inc</span>
                 </Link>
 
-                {PageLinks.map((link) => (
+                {FinancePageLinks.map((link) => (
                     <Link
                         to={link.path}
                         className="text-muted-foreground hover:text-foreground"

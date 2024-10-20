@@ -1,17 +1,19 @@
-import './App.css'
 import { BrowserRouter, Routes, Route,} from "react-router-dom";
-import Navbar from './components/Navbar';
-import ProjectPage from './page/ProjectPage';
-import CostPage from './page/CostPage';
-import Dashboard  from './page/DashboardPage';
-import FundPage from './page/FundPage';
+import ProjectPage from './page/FinancePages/ProjectPage';
+import CostPage from './page/FinancePages/CostPage';
+import Dashboard  from './page/FinancePages/DashboardPage';
+import FundPage from './page/FinancePages/FundPage';
 import AddFund from './page/add-from/AddFund';
 import AddCost from './page/add-from/AddCost';
 import { AddProject } from './page/add-from/AddProject';
-import { AnalyticsPage } from './page/AnalyticsPage';
+import { AnalyticsPage } from './page/FinancePages/AnalyticsPage';
 import { Toaster } from 'react-hot-toast';
-
-
+import HomePage from "./page/GeneralPages/Home";
+import Login from "./page/Auth/Login";
+import CoordinatorsPage from "./page/GeneralPages/CoordinatorsPage";
+import TrainingmanualPage from "./page/GeneralPages/TrainingmanualPage";
+import PeopleGroupPage from "./page/GeneralPages/PeopleGroupPage";
+import Navbar from "./components/Navbar";
 
 
  function App() {
@@ -23,7 +25,16 @@ import { Toaster } from 'react-hot-toast';
         <Navbar/>
          <div>
             <Routes>
-              <Route path='/' element={<Dashboard />} />
+
+              {/* GENERAL PAGES */}
+              <Route path='/' element={<HomePage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/coordinators" element={<CoordinatorsPage />} />
+              <Route path="/trainingmanual" element={<TrainingmanualPage />} />
+              <Route path="/Peoplegroup" element={<PeopleGroupPage />} />
+
+              {/* FINANCE TEAM PAGES */}
+              <Route path='/finance' element={<Dashboard />} />
               <Route path='/projects' element={<ProjectPage />} />
               <Route path='/funds' element={<FundPage />}/>
               <Route path='/costs' element={<CostPage />}/>

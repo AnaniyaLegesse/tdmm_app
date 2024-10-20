@@ -120,7 +120,7 @@ export const projectPageColumns: ColumnDef<ProjectPageData>[] = [
                 {status}
               </Button>
             );
-          case "Over Budge":
+          case "Over Budget":
             return (
               <Button variant="outline_danger" size="sm">
                 {status}
@@ -389,5 +389,140 @@ export const CostPageColumns: ColumnDef<CostPageData>[] = [
     },
   },
   
+  
+]
+
+
+
+export type CoordinatorsPageData = {
+  id: string
+  name: string
+  phone: string
+  location: string
+  status: string
+}
+export const CoordinatorsPageColumns: ColumnDef<CoordinatorsPageData>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: "name",
+   
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Project name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+    cell: ({ row }) => {
+      
+      return (
+          <div className="text-left ml-5 font-medium">
+            {row.getValue("name")}
+            </div>)
+    },
+  },
+  {
+    accessorKey: "phone",
+    header: () => <div className="text-left">Phone_No</div>,
+    cell: ({ row }) => {
+      
+      return (
+          <div className="text-left ml-5 font-medium">
+            {row.getValue("phone")}
+            </div>)
+    },
+  },
+  {
+    accessorKey: "location",
+    header: () => <div className="text-left">Location</div>,
+    cell: ({ row }) => {
+      
+      return (
+          <div className="text-left ml-5 font-medium">
+            {row.getValue("location")}
+            </div>)
+    },
+  },
+  
+
+  {
+    accessorKey: "status",
+    header: () => <div className="text-left">Status</div>,
+    cell: ({ row }) => {
+        const status=row.getValue("status")
+
+        switch(status){
+          case "Available":
+            return (
+              <Button variant="outline_success" size="sm">
+                {status}
+              </Button>
+            );
+          case "Not Available":
+            return (
+              <Button variant="outline_danger" size="sm">
+                {status}
+              </Button>
+            )
+        }
+
+    },
+  },
+  
+    
+  {
+    id: "actions",
+    header: () => <div className="text-left">More</div>,
+    cell: ({ row }) => {
+      const payment = row.original
+ 
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(payment.id)}
+            >
+              Copy payment ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>View customer</DropdownMenuItem>
+            <DropdownMenuItem>View payment details</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
+    },
+  },
   
 ]
